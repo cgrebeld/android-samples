@@ -859,7 +859,10 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
                 // Try connecting again
                 debugLog("SendIntentException, so connecting again.");
                 connect();
-            }
+            } catch (Exception e) {
+                debugLog("error calling startResolutionForResult. Giving up.");
+                giveUp(new SignInFailureReason(mConnectionResult.getErrorCode()));
+            } 
         } else {
             // It's not a problem what we can solve, so give up and show an
             // error.
